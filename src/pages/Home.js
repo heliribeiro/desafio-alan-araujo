@@ -6,6 +6,7 @@ import CompanyCard from '../components/CompanyCard/index'
 import { Grid, TextField, IconButton, InputAdornment } from '@material-ui/core';
 import { Search } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
+import history from '../history';
 
 
 const useSytles = makeStyles({
@@ -43,9 +44,8 @@ export default function Home() {
     setCompanies(newCompanies)
   }
 
-  const handleEdit = async (id) => {
-    await api.post(`/companies/${id}`);
-    setCompanies(companies)
+  const handleEdit = async (company) => {
+    //    history.push('/editCompany')
   }
 
   return (
@@ -70,7 +70,7 @@ export default function Home() {
       <Grid container spacing={2} className={classes.gridContainer} >
         {companiesFiltered.map((company) => (
           <Grid item xs={12} sm={6} md={4} lg={3} >
-            <CompanyCard key={company.id} company={company} handleDelete={handleDelete} />
+            <CompanyCard key={company.id} company={company} handleDelete={handleDelete} handleEdit={handleEdit} />
           </Grid>
         ))}
 

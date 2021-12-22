@@ -31,6 +31,9 @@ export default function Routes() {
       <CustomRoute isPrivate exact path='/createcompany' component={CreateCompany}>
         <Layout><CreateCompany /></Layout>
       </CustomRoute>
+      <CustomRoute isPrivate exact path='/editCompany' component={CreateCompany}>
+        <Layout><CreateCompany /></Layout>
+      </CustomRoute>
       <Redirect exact from="/" to="/login" />
     </Switch>
   );

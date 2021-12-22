@@ -13,7 +13,7 @@ export default function CompanyCard({ company, handleDelete, handleEdit }) {
 
       <CardHeader
         avatar={
-          <IconButton onClick={() =>{handleEdit(company.id)}}>
+          <IconButton onClick={() =>{handleEdit(company)}}>
             <Edit className={classes.edit} />
           </IconButton>
         }
