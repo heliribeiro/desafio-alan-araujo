@@ -43,6 +43,11 @@ export default function Home() {
     setCompanies(newCompanies)
   }
 
+  const handleEdit = async (id) => {
+    await api.post(`/companies/${id}`);
+    setCompanies(companies)
+  }
+
   return (
     <>
       <Grid className={classes.search} align='center' >

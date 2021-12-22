@@ -12,6 +12,10 @@ export const useSytles = makeStyles({
   delete: {
     color: '#ff4b4b'
   },
+  edit:{
+    marginTop: -10,
+    color: '#FF8E00'
+  },
   cardTitle:{
     alignSelf: 'center'
   }

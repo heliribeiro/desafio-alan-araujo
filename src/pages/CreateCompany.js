@@ -4,10 +4,9 @@ import React, { useContext } from 'react'
 
 import InputMask from 'react-input-mask'
 
-import fetchJsonp from 'fetch-jsonp';
-
 import { Context } from '../Context/AuthContext'
 import api from '../services/api';
+import fetchReceita from '../services/receita'
 
 export default function CreateCompany() {
 
@@ -30,17 +29,7 @@ export default function CreateCompany() {
     const { cnpj } = props.values
     const cnpjNumber = cnpj.replace(/[^\d]+/g, "")
 
-
-    const url = `https://www.receitaws.com.br/v1/cnpj/${cnpjNumber}`
-    const data = await fetchJsonp(url)
-      .then(function (response) {
-        return response.json()
-      }).then(function (json) {
-        return json
-      }).catch(function (err) {
-
-        console.log('parsing failed', err)
-      })
+   const data = await fetchReceita(cnpjNumber)
 
     if (data && data.abertura) {
 
