@@ -11,6 +11,7 @@ export default function useAuth() {
   const [erroLogin, setErroLogin] = useState(false);
 
   useEffect(() => {
+
     const token = localStorage.getItem('token');
 
     if (token) {
@@ -23,21 +24,24 @@ export default function useAuth() {
   
   async function handleLogin(email,password) {
 
-    const { data:{token, user} } = await api.post('/session',{
-      email,
-      password
-    }).catch(error=>{
-      //alert('Erro ao fazer o login, verifique o seu email e senha')
+    try {
+      const { data:{token, user} } = await api.post('/session',{
+        email,
+        password
+      })
+
+      localStorage.setItem('name', JSON.stringify(user.name));
+      localStorage.setItem('token', JSON.stringify(token));
+      api.defaults.headers.Authorization = `Bearer ${token}`; 
+      setAuthenticated(true);
+      history.push('/home');
+
+    } catch (error) {
       console.log(error)
       setErroLogin(true)
-    });
-
-    localStorage.setItem('name', JSON.stringify(user.name));
-
-    localStorage.setItem('token', JSON.stringify(token));
-    api.defaults.headers.Authorization = `Bearer ${token}`; 
-    setAuthenticated(true);
-    history.push('/home');
+    }
+  
+    
   }
 
   function handleLogout() {
@@ -47,5 +51,5 @@ export default function useAuth() {
     history.push('/login');
   }
   
-  return { authenticated, loading, erroLogin ,handleLogin, handleLogout };
+  return { authenticated, loading, erroLogin , setErroLogin,handleLogin, handleLogout };
 }
